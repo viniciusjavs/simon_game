@@ -1,4 +1,5 @@
 #include "tm4c123gh6pm.h"
+#include <algorithm>
 #include <array>
 #include <random>
 
@@ -41,8 +42,7 @@ int main(void) {
   std::uniform_int_distribution rand(0, Color::sz - 1);
   // Fill array with random data
   std::array<int, max> seq;
-  for (auto &elem : seq)
-    elem = rand(engine);
+  std::generate(seq.begin(), seq.end(), [&]() { return rand(engine); });
 
   // Interfaces
   // Port A
