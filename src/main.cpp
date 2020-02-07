@@ -41,8 +41,11 @@ int main(void) {
   // Choose a random number between 0 and Color length - 1
   std::uniform_int_distribution rand(0, Color::sz - 1);
   // Fill array with random data
-  std::array<int, max> seq;
-  std::generate(seq.begin(), seq.end(), [&]() { return rand(engine); });
+  const auto seq = [&] {
+    std::array<int, max> seq;
+    std::generate(seq.begin(), seq.end(), [&]() { return rand(engine); });
+    return seq;
+  }();
 
   // Interfaces
   // Port A
